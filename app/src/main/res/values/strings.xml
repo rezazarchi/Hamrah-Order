@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Hamrah Order</string>
+    
+    <string name="enter_your_information_please">لطفاً اطلاعات ورود خود را وارد نمایید.</string>
+    <string name="name">نام</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="mobile">تلفن همراه</string>
+    <string name="phone">تلفن ثابت</string>
+    <string name="full_address">آدرس دقیق</string>
+    <string name="gender">جنسیت</string>
+    <string name="female">خانم</string>
+    <string name="male">آقا</string>
+    <string name="next_step">مرحله بعد</string>
 </resources>
