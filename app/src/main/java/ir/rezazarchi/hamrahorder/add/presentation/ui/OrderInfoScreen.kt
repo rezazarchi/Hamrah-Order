@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -25,14 +26,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ir.rezazarchi.hamrahorder.R
@@ -80,9 +81,14 @@ fun OrderInfoScreen(
                 onValueChange = {
                     onNameValueChanged(it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
-                    Text(text = stringResource(R.string.name))
+                    Text(text = stringResource(R.string.name), fontWeight = FontWeight.Bold)
                 },
                 trailingIcon = {
                     Icon(
@@ -104,9 +110,14 @@ fun OrderInfoScreen(
                 onValueChange = {
                     onFamilyValueChanged(it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
-                    Text(text = stringResource(R.string.family))
+                    Text(text = stringResource(R.string.family), fontWeight = FontWeight.Bold)
                 },
                 trailingIcon = {
                     Icon(
@@ -128,9 +139,14 @@ fun OrderInfoScreen(
                 onValueChange = {
                     onMobileValueChanged(it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone,
+                    imeAction = ImeAction.Next
+                ),
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
-                    Text(text = stringResource(R.string.mobile))
+                    Text(text = stringResource(R.string.mobile), fontWeight = FontWeight.Bold)
                 },
                 trailingIcon = {
                     Icon(
@@ -152,9 +168,14 @@ fun OrderInfoScreen(
                 onValueChange = {
                     onPhoneValueChanged(it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone,
+                    imeAction = ImeAction.Next
+                ),
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
-                    Text(text = stringResource(R.string.phone))
+                    Text(text = stringResource(R.string.phone), fontWeight = FontWeight.Bold)
                 },
                 trailingIcon = {
                     Icon(
@@ -182,9 +203,13 @@ fun OrderInfoScreen(
                 onValueChange = {
                     onAddressValueChanged(it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done,
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(text = stringResource(R.string.full_address))
+                    Text(text = stringResource(R.string.full_address), fontWeight = FontWeight.Bold)
                 },
                 trailingIcon = {
                     Icon(
@@ -253,7 +278,7 @@ fun GenderSelection(
     ) {
         Text(
             text = stringResource(R.string.gender),
-            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
@@ -266,7 +291,7 @@ fun GenderSelection(
                 label = {
                     Text(stringResource(R.string.male))
                 },
-                shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2)
+                shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
             )
             SegmentedButton(
                 onClick = {
@@ -276,7 +301,7 @@ fun GenderSelection(
                 label = {
                     Text(stringResource(R.string.female))
                 },
-                shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2)
+                shape = RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
             )
         }
     }
