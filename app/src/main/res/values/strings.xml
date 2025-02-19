@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Hamrah Order</string>
-    
+
+    <string name="order_screen_info_title">ثبت نام</string>
     <string name="enter_your_information_please">لطفاً اطلاعات ورود خود را وارد نمایید.</string>
     <string name="name">نام</string>
     <string name="family">نام خانوادگی</string>
@@ -11,7 +12,9 @@
     <string name="female">خانم</string>
     <string name="male">آقا</string>
     <string name="next_step">مرحله بعد</string>
+    <string name="back">back</string>
 
+    <string name="order_screen_map_title">موقعیت روی نقشه</string>
     <string name="select_your_location">موقعیت مورد نظر خود را روی نقشه مشخص کنید.</string>
     <string name="confirm_location">تایید موقعیت</string>
 </resources>
