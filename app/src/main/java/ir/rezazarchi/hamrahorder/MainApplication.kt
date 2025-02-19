@@ -1,6 +1,7 @@
 package ir.rezazarchi.hamrahorder
 
 import android.app.Application
+import ir.rezazarchi.hamrahorder.add.di.addOrderModule
 import ir.rezazarchi.hamrahorder.core.maputils.mapNetworkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.androix.startup.KoinStartup
@@ -14,6 +15,7 @@ class MainApplication : Application(), KoinStartup {
         androidContext(this@MainApplication)
         modules(
             mapNetworkModule,
+            addOrderModule,
         )
     }
 
