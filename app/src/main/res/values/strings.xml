@@ -11,4 +11,7 @@
     <string name="female">خانم</string>
     <string name="male">آقا</string>
     <string name="next_step">مرحله بعد</string>
+
+    <string name="select_your_location">موقعیت مورد نظر خود را روی نقشه مشخص کنید.</string>
+    <string name="confirm_location">تایید موقعیت</string>
 </resources>
