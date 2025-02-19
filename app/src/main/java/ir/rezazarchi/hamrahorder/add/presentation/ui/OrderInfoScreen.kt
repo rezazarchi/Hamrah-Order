@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ir.rezazarchi.hamrahorder.R
 import ir.rezazarchi.hamrahorder.add.domain.model.Gender
+import ir.rezazarchi.hamrahorder.add.domain.model.SelectedLocation
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderState
 
 @Composable
@@ -207,7 +208,7 @@ fun OrderInfoScreen(
                 },
             )
         }
-        val nextButtonEnabled by remember {
+        val nextButtonEnabled = {
             derivedStateOf {
                 orderState.isNameCorrect &&
                         orderState.isFamilyCorrect &&
@@ -227,7 +228,7 @@ fun OrderInfoScreen(
             content = {
                 Text(stringResource(R.string.next_step), fontWeight = FontWeight.Bold)
             },
-            enabled = nextButtonEnabled,
+            enabled = nextButtonEnabled().value,
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Green,
@@ -302,9 +303,7 @@ private fun PreviewOrderInfoScreen() {
                 fullAddress = "",
                 isFullAddressCorrect = false,
                 gender = Gender.Male,
-                lat = 0.0,
-                lng = 0.0,
-
+                location = SelectedLocation(0.0, 0.0),
                 ),
             modifier = Modifier,
             onNameValueChanged = {},
