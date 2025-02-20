@@ -2,6 +2,7 @@ package ir.rezazarchi.hamrahorder.add.presentation.viewmodel
 
 import ir.rezazarchi.hamrahorder.add.domain.model.Gender
 import ir.rezazarchi.hamrahorder.add.domain.model.SelectedLocation
+import ir.rezazarchi.hamrahorder.core.utils.UiText
 
 data class OrderState(
     var name: String = "",
@@ -27,4 +28,10 @@ sealed class OrderEvents {
     data class OnGenderSelected(val gender: Gender) : OrderEvents()
     data class OnLocationSelected(val selectedLocation: SelectedLocation) : OrderEvents()
     data object OnSubmitOrder : OrderEvents()
+}
+
+sealed class OrderEffects {
+    data object OnSubmissionInProgress : OrderEffects()
+    data class OnSubmissionFailed(val errorMessage: UiText) : OrderEffects()
+    data object OnSubmittedSuccessfully : OrderEffects()
 }

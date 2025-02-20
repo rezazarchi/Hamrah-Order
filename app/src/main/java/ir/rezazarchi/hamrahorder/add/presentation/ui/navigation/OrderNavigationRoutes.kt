@@ -11,4 +11,7 @@ sealed class OrderNavigationRoutes {
     @Serializable
     data object OrderMap : OrderNavigationRoutes()
 
+    @Serializable
+    data object OrderProgress: OrderNavigationRoutes()
+
 }

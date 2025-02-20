@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ir.rezazarchi.hamrahorder.R
 import ir.rezazarchi.hamrahorder.add.presentation.ui.navigation.OrderNavigationRoutes
+import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEffects
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnAddressChanged
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnFamilyChanged
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnGenderSelected
@@ -31,11 +32,17 @@ import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnNameCh
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnPhoneChanged
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderEvents.OnSubmitOrder
 import ir.rezazarchi.hamrahorder.add.presentation.viewmodel.OrderViewModel
+import ir.rezazarchi.hamrahorder.core.utils.ObserveAsEvents
+import ir.rezazarchi.hamrahorder.core.utils.UiText
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OrderRootScreen(modifier: Modifier = Modifier) {
+fun OrderRootScreen(
+    modifier: Modifier = Modifier,
+    onSubmittedSuccessfully: () -> Unit,
+    onSubmitFailure: (UiText) -> Unit
+) {
 
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -53,6 +60,10 @@ fun OrderRootScreen(modifier: Modifier = Modifier) {
 
                             OrderNavigationRoutes.OrderMap.javaClass.canonicalName -> stringResource(
                                 R.string.order_screen_map_title
+                            )
+
+                            OrderNavigationRoutes.OrderProgress.javaClass.canonicalName -> stringResource(
+                                R.string.order_in_progress
                             )
 
                             else -> ""
@@ -78,6 +89,19 @@ fun OrderRootScreen(modifier: Modifier = Modifier) {
         content = { innerPadding ->
 
             val viewModel = koinViewModel<OrderViewModel>()
+
+            ObserveAsEvents(viewModel.effect) {
+                when (it) {
+                    OrderEffects.OnSubmittedSuccessfully ->
+                        onSubmittedSuccessfully()
+
+                    is OrderEffects.OnSubmissionFailed ->
+                        onSubmitFailure(it.errorMessage)
+
+                    OrderEffects.OnSubmissionInProgress ->
+                        navController.navigate(OrderNavigationRoutes.OrderProgress)
+                }
+            }
 
             NavHost(
                 navController = navController,
@@ -106,6 +130,11 @@ fun OrderRootScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier.padding(innerPadding),
                         onLocationSelected = { viewModel.onEvent(OnLocationSelected(it)) },
                         onNextClicked = { viewModel.onEvent(OnSubmitOrder) }
+                    )
+                }
+                composable<OrderNavigationRoutes.OrderProgress> {
+                    OrderSubmissionProgressScreen(
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }

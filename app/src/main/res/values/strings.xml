@@ -17,4 +17,19 @@
     <string name="order_screen_map_title">موقعیت روی نقشه</string>
     <string name="select_your_location">موقعیت مورد نظر خود را روی نقشه مشخص کنید.</string>
     <string name="confirm_location">تایید موقعیت</string>
+    <string name="order_in_progress">در حال ارسال اطلاعات</string>
+    <string name="submit_success">ارسال اطلاعات با موفقیت انجام شد.</string>
+
+    <!--  API call errors  -->
+    <string name="error_request_timeout">زمان درخواست به پایان رسید.</string>
+    <string name="error_bad_request">اشتباهی در درخواست شما رخ داده است.</string>
+    <string name="error_unauthorized">احراز هویت با مشکل مواجه شده است.</string>
+    <string name="error_forbidden">دسترسی غیرمجاز!</string>
+    <string name="error_null_response">پاسخ تهی از سمت سرور دریافت شده است.</string>
+    <string name="error_too_many_requests">تعداد درخواست بسیار زیاد است.</string>
+    <string name="error_no_internet">مشکل در اتصال به سرویس‌دهنده. لطفا اتصال اینترنت خود را بررسی نمایید.</string>
+    <string name="error_server_error">مشکل داخلی در سرویس‌دهنده رخ داده است.</string>
+    <string name="error_serialization">خطای تجزیه داده‌های دریافتی. لطفاً بعداً دوباره تلاش کنید.</string>
+    <string name="error_unknown">خطای ناشناخته رخ داده است.</string>
+
 </resources>

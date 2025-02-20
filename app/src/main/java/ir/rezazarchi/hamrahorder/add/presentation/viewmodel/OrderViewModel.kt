@@ -1,19 +1,32 @@
 package ir.rezazarchi.hamrahorder.add.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import ir.rezazarchi.hamrahorder.add.domain.model.OrderSubmissionData
 import ir.rezazarchi.hamrahorder.add.domain.usecase.EmptyTextValidatorUseCase
 import ir.rezazarchi.hamrahorder.add.domain.usecase.PhoneNumberValidatorUseCase
+import ir.rezazarchi.hamrahorder.add.domain.usecase.SubmitOrderUseCase
+import ir.rezazarchi.hamrahorder.core.data.onError
+import ir.rezazarchi.hamrahorder.core.data.onSuccess
+import ir.rezazarchi.hamrahorder.core.utils.toUiText
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class OrderViewModel(
     private val isTextValid: EmptyTextValidatorUseCase,
     private val isPhoneNumberValid: PhoneNumberValidatorUseCase,
+    private val submitOrder: SubmitOrderUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(OrderState())
     val state = _state.asStateFlow()
+
+    private val _effect = Channel<OrderEffects>()
+    val effect = _effect.receiveAsFlow()
 
     fun onEvent(event: OrderEvents) {
         when (event) {
@@ -79,7 +92,30 @@ class OrderViewModel(
             }
 
             OrderEvents.OnSubmitOrder -> {
-                TODO()
+                submitOrderToServer()
+            }
+        }
+    }
+
+    private fun submitOrderToServer() {
+        with(_state.value) {
+            viewModelScope.launch {
+                _effect.send(OrderEffects.OnSubmissionInProgress)
+                submitOrder(
+                    OrderSubmissionData(
+                        name = name,
+                        family = family,
+                        mobile = mobile,
+                        phone = phone,
+                        address = fullAddress,
+                        gender = gender,
+                        selectedLocation = location
+                    )
+                ).onSuccess {
+                    _effect.send(OrderEffects.OnSubmittedSuccessfully)
+                }.onError {
+                    _effect.send(OrderEffects.OnSubmissionFailed(it.toUiText()))
+                }
             }
         }
     }
