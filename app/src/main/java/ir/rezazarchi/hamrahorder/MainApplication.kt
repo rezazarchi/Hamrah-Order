@@ -5,6 +5,7 @@ import ir.rezazarchi.hamrahorder.add.di.addOrderModule
 import ir.rezazarchi.hamrahorder.core.maputils.mapNetworkModule
 import ir.rezazarchi.hamrahorder.core.network.jsonModule
 import ir.rezazarchi.hamrahorder.core.network.retrofitModule
+import ir.rezazarchi.hamrahorder.list.di.orderListModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.androix.startup.KoinStartup
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -20,6 +21,7 @@ class MainApplication : Application(), KoinStartup {
             addOrderModule,
             jsonModule,
             retrofitModule,
+            orderListModule,
         )
     }
 

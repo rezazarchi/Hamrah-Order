@@ -75,6 +75,7 @@ dependencies {
     implementation(libs.bundles.koin)
     implementation(libs.bundles.retrofit)
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlinx.collections.immutable.jvm)
     implementation(libs.map.android.sdk)
     testImplementation(libs.junit)
     testImplementation(libs.mockwebserver)
