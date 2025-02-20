@@ -20,6 +20,8 @@
     <string name="order_in_progress">در حال ارسال اطلاعات</string>
     <string name="submit_success">ارسال اطلاعات با موفقیت انجام شد.</string>
 
+    <string name="orders_address_list">لیست آدرس سفارش‌ها</string>
+
     <!--  API call errors  -->
     <string name="error_request_timeout">زمان درخواست به پایان رسید.</string>
     <string name="error_bad_request">اشتباهی در درخواست شما رخ داده است.</string>
