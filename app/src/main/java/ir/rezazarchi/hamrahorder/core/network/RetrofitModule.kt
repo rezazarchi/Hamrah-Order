@@ -21,9 +21,9 @@ const val BASE_URL = "BASE_URL"
 
 val retrofitModule = module {
 
-    single<Long>(named(READ_TIMEOUT)) { 30 * 1000 }
-    single<Long>(named(WRITE_TIMEOUT)) { 10 * 1000 }
-    single<Long>(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
+    single<Long>(named(READ_TIMEOUT)) { 60 * 1000 }
+    single<Long>(named(WRITE_TIMEOUT)) { 60 * 1000 }
+    single<Long>(named(CONNECTION_TIMEOUT)) { 60 * 1000 }
     single(named(BASE_URL)) { API_BASE_URL_VALUE }
 
     factory<Interceptor>(named(HTTP_LOGGING_INTERCEPTOR)) {
