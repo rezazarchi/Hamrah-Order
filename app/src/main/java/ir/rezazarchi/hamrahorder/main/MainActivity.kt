@@ -1,5 +1,6 @@
 package ir.rezazarchi.hamrahorder.main
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,11 +23,13 @@ import ir.rezazarchi.hamrahorder.list.presentation.ui.OrdersListScreenRoot
 import ir.rezazarchi.hamrahorder.main.navigation.MainNavigationRoutes
 import ir.rezazarchi.hamrahorder.ui.theme.HamrahOrderTheme
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setLocale("fa")
         setContent {
             HamrahOrderTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
@@ -92,5 +95,15 @@ class MainActivity : ComponentActivity() {
             withDismissAction = true,
             duration = SnackbarDuration.Long,
         )
+    }
+
+    private fun setLocale(languageCode: String) {
+        Build.VERSION_CODES.N
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        createConfigurationContext(config)
+
     }
 }
